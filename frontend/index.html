@@ -381,16 +381,18 @@ let chH=null,chS=null;
 
 <script>
 async function boot(){
-  const CLERK_KEY = "pk_test_YOUR_REAL_KEY"; // replace this
+  const CLERK_KEY = "pk_test_Zml0LW1vc3F1aXRvLTc4LmNsZXJrLmFjY291bnRzLmRldiQ";
 
   const script = document.createElement("script");
   script.src = "https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js";
   script.async = true;
+
+  // 🔥 THIS LINE FIXES YOUR ERROR
   script.setAttribute("data-clerk-publishable-key", CLERK_KEY);
 
   script.onload = async () => {
     try {
-      await window.Clerk.load();   // ✅ NO key here
+      await window.Clerk.load(); // ✅ no key here
       clerk = window.Clerk;
 
       if (clerk.user) {
