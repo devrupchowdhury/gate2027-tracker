@@ -383,20 +383,31 @@ async function boot(){
   const CLERK_KEY = 'pk_test_Zml0LW1vc3F1aXRvLTc4LmNsZXJrLmFjY291bnRzLmRldiQ';
 
   const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@4/dist/clerk.browser.js';
+  script.src = 'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js';
+  script.async = true;
+
   script.onload = async () => {
     try {
-      clerk = new window.Clerk(CLERK_KEY);
-      await clerk.load();
-      if(clerk.user){ signedIn(); }
-      else {
+      await window.Clerk.load({
+        publishableKey: CLERK_KEY
+      });
+
+      clerk = window.Clerk;
+
+      if (clerk.user) {
+        signedIn();
+      } else {
         clerk.mountSignIn(document.getElementById('clerk-mount'));
-        clerk.addListener(({user}) => { if(user) signedIn(); });
+
+        clerk.addListener(({ user }) => {
+          if (user) signedIn();
+        });
       }
     } catch(err) {
       console.error('Clerk error:', err);
     }
   };
+
   document.head.appendChild(script);
 }
 
