@@ -427,7 +427,7 @@ let chH=null,chS=null;
 
 // ── Boot ──────────────────────────────────────────────────
 async function boot(){
-  let pk='';
+  let pk='pk_test_Zml0LW1vc3F1aXRvLTc4LmNsZXJrLmFjY291bnRzLmRldiQ';
   try{ const c=await fetch(API+'/api/config').then(r=>r.json()); pk=c.clerkPublishableKey||''; }catch(e){}
 
   if(!pk||pk.includes('xxx')){
